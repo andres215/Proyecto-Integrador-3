@@ -1,14 +1,16 @@
 package modelo;
 
-public class PerfilProfesional {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class PerfilProfesional implements Serializable {
 	
 	private int codigoPerfilProfesional;
 	private String descripcion;
 	
-	public PerfilProfesional(int codigoPerfilProfesional, String descripcion) {
+	public PerfilProfesional(int codigoPerfilProfesional) {
 		super();
 		this.codigoPerfilProfesional = codigoPerfilProfesional;
-		this.descripcion = descripcion;
 	}
 
 	public int getCodigoPerfilProfesional() {

@@ -1,6 +1,9 @@
 package modelo;
 
-public class Asignatura {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Asignatura implements Serializable {
 	
 	private int codigoAsignatura;
 	private String nombre;

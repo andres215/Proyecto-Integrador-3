@@ -1,14 +1,16 @@
 package modelo;
 
-public class Vision {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Vision implements Serializable {
 	
 	private int codigoVision;
 	private String descripcion;
 	
-	public Vision(int codigoVision, String descripcion) {
+	public Vision(int codigoVision) {
 		super();
 		this.codigoVision = codigoVision;
-		this.descripcion = descripcion;
 	}
 
 	public int getCodigoVision() {

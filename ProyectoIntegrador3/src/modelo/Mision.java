@@ -1,14 +1,16 @@
 package modelo;
 
-public class Mision {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Mision implements Serializable {
 
 	private int codigoMision;
 	private String descripcion;
 	
-	public Mision(int codigoMision, String descripcion) {
+	public Mision(int codigoMision) {
 		super();
 		this.codigoMision = codigoMision;
-		this.descripcion = descripcion;
 	}
 
 	public int getCodigoMision() {

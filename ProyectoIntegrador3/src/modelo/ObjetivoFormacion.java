@@ -1,14 +1,16 @@
 package modelo;
 
-public class ObjetivoFormacion {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class ObjetivoFormacion implements Serializable {
 	
 	private int codigoObjetivoFormacion;
 	private String descripcion;
 	
-	public ObjetivoFormacion(int codigoObjetivoFormacion, String descripcion) {
+	public ObjetivoFormacion(int codigoObjetivoFormacion) {
 		super();
 		this.codigoObjetivoFormacion = codigoObjetivoFormacion;
-		this.descripcion = descripcion;
 	}
 
 	public int getCodigoObjetivoFormacion() {

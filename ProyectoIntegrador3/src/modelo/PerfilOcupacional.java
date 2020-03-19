@@ -1,14 +1,16 @@
 package modelo;
 
-public class PerfilOcupacional {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class PerfilOcupacional implements Serializable {
 	
 	private int codigoPerfilOcupacional;
 	private String descripcion;
 	
-	public PerfilOcupacional(int codigoPerfilOcupacional, String descripcion) {
+	public PerfilOcupacional(int codigoPerfilOcupacional) {
 		super();
 		this.codigoPerfilOcupacional = codigoPerfilOcupacional;
-		this.descripcion = descripcion;
 	}
 
 	public int getCodigoPerfilOcupacional() {
