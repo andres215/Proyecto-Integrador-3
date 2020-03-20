@@ -12,7 +12,7 @@ public class PanelObjetivoFormacion extends JPanel {
 	
 	public PanelObjetivoFormacion() {
 		Font font = new Font("Verdana", Font.BOLD, 15);
-		TitledBorder border = BorderFactory.createTitledBorder("Objetivo de formaciÃ³n");
+		TitledBorder border = BorderFactory.createTitledBorder("Objetivo de formación");
 		border.setTitleColor(Color.BLUE);
 		border.setTitleFont(font);
 		setBorder(border);

@@ -16,7 +16,7 @@ public class Main extends JFrame implements ActionListener {
 	
 	public static final String VER_PERFIL_OCUPACIONAL = "Perfil ocupacional";
 	public static final String VER_PERFIL_PROFESIONAL = "Perfil profesional";
-	public static final String VER_PENSUM = "PÃ©nsum";
+	public static final String VER_PENSUM = "Pénsum";
 	
 	private PanelBanner banner;
 	private PanelMision panelMision;
@@ -30,7 +30,7 @@ public class Main extends JFrame implements ActionListener {
 		setSize(new Dimension(650,480));
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setTitle("Programa IngenierÃ­a de Sistemas - InstituciÃ³n Universitaria Antonio JosÃ© Camacho");
+		setTitle("Programa Ingeniería de Sistemas - Institución Universitaria Antonio José Camacho");
 		setLayout(new BorderLayout());
 
 		butPerfilProfesional = new JButton(VER_PERFIL_PROFESIONAL);

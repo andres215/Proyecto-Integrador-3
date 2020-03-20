@@ -12,7 +12,7 @@ public class PanelVision extends JPanel {
 	
 	public PanelVision() {
 		Font font = new Font("Verdana", Font.BOLD, 15);
-		TitledBorder border = BorderFactory.createTitledBorder("VisiÃ³n");
+		TitledBorder border = BorderFactory.createTitledBorder("Visión");
 		border.setTitleColor(Color.BLUE);
 		border.setTitleFont(font);
 		setBorder(border);
