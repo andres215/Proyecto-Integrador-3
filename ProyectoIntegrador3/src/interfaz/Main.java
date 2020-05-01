@@ -1,15 +1,19 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements ActionListener {
@@ -44,8 +48,8 @@ public class Main extends JFrame implements ActionListener {
 		butVerPensum.addActionListener(this);
 		
 		banner = new PanelBanner();
-		panelMision = new PanelMision();
-		panelVision = new PanelVision();
+		panelMision = new PanelMision(this);
+		panelVision = new PanelVision(this);
 		panelObjetivoFormacion = new PanelObjetivoFormacion();
 		
 		JPanel aux1 = new JPanel();
@@ -59,6 +63,9 @@ public class Main extends JFrame implements ActionListener {
 		aux2.add(panelObjetivoFormacion);
 		
 		JPanel aux3 = new JPanel();
+		TitledBorder border = BorderFactory.createTitledBorder("Otras opciones");
+		border.setTitleColor(Color.BLUE);
+		aux3.setBorder(border);
 		aux3.setLayout(new GridLayout(1,3));
 		aux3.add(butPerfilProfesional);
 		aux3.add(butPerfilOcupacional);
