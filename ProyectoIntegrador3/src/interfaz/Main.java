@@ -3,7 +3,6 @@ package interfaz;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
+
+import modelo.ProgramaSIS;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements ActionListener {
@@ -29,6 +30,8 @@ public class Main extends JFrame implements ActionListener {
 	
 	private JButton butPerfilOcupacional, butPerfilProfesional, butVerPensum;
 	
+	private ProgramaSIS modelo;
+	
 	public Main() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(new Dimension(650,480));
@@ -36,6 +39,8 @@ public class Main extends JFrame implements ActionListener {
 		setResizable(false);
 		setTitle("Programa Ingeniería de Sistemas - Institución Universitaria Antonio José Camacho");
 		setLayout(new BorderLayout());
+		
+		modelo = new ProgramaSIS();
 
 		butPerfilProfesional = new JButton(VER_PERFIL_PROFESIONAL);
 		butPerfilProfesional.setActionCommand(VER_PERFIL_PROFESIONAL);
@@ -50,7 +55,7 @@ public class Main extends JFrame implements ActionListener {
 		banner = new PanelBanner();
 		panelMision = new PanelMision(this);
 		panelVision = new PanelVision(this);
-		panelObjetivoFormacion = new PanelObjetivoFormacion();
+		panelObjetivoFormacion = new PanelObjetivoFormacion(this);
 		
 		JPanel aux1 = new JPanel();
 		aux1.setLayout(new GridLayout(1,2));
@@ -83,6 +88,30 @@ public class Main extends JFrame implements ActionListener {
 	
 	public void inicializar() {
 		
+	}
+	
+	public String getVision() {
+		return modelo.getVision().getDescripcion();
+	}
+	
+	public void guardarVision(String vision) {
+		modelo.getVision().setDescripcion(vision);
+	}
+	
+	public String getMision() {
+		return modelo.getMision().getDescripcion();
+	}
+	
+	public void guardarMision(String mision) {
+		modelo.getMision().setDescripcion(mision);
+	}
+	
+	public String getObjetivoFormacion() {
+		return modelo.getObjetivoFormacion().getDescripcion();
+	}
+	
+	public void guardarObjetivoFormacion(String objetivo) {
+		modelo.getObjetivoFormacion().setDescripcion(objetivo);
 	}
 	
 	@Override

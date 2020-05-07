@@ -9,6 +9,7 @@ public class Pensum implements Serializable {
 	private Semestre[] semestres;
 
 	public Pensum() {
+		semestres = new Semestre[10];
 		semestres[0] = new Semestre("Primero", new ArrayList<Asignatura>());
 		semestres[1] = new Semestre("Segundo", new ArrayList<Asignatura>());
 		semestres[2] = new Semestre("Tercero", new ArrayList<Asignatura>());
