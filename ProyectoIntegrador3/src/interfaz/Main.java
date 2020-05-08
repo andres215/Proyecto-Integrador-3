@@ -6,10 +6,16 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
@@ -27,13 +33,20 @@ public class Main extends JFrame implements ActionListener {
 	private PanelMision panelMision;
 	private PanelVision panelVision;
 	private PanelObjetivoFormacion panelObjetivoFormacion;
+	private DialogoPerfilProfesional dialogoPerfilProfesional;
+	private DialogoPerfilOcupacional dialogoPerfilOcupacional;
+//	private DialogoPensum dialogoPensum;
 	
 	private JButton butPerfilOcupacional, butPerfilProfesional, butVerPensum;
 	
 	private ProgramaSIS modelo;
 	
 	public Main() {
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		try{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}catch(Exception e){	
+		}
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(new Dimension(650,480));
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -41,6 +54,7 @@ public class Main extends JFrame implements ActionListener {
 		setLayout(new BorderLayout());
 		
 		modelo = new ProgramaSIS();
+		deserializar();
 
 		butPerfilProfesional = new JButton(VER_PERFIL_PROFESIONAL);
 		butPerfilProfesional.setActionCommand(VER_PERFIL_PROFESIONAL);
@@ -80,14 +94,61 @@ public class Main extends JFrame implements ActionListener {
 		add(aux2, BorderLayout.CENTER);
 		add(aux3, BorderLayout.SOUTH);
 		
-		try{
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		}catch(Exception e){	
-		}
 	}
 	
-	public void inicializar() {
-		
+	public void serializar() {
+		try {    
+            FileOutputStream file = new FileOutputStream("datos/datos.ser"); 
+            ObjectOutputStream out = new ObjectOutputStream(file); 
+            out.writeObject(modelo); 
+            out.close(); 
+            file.close(); 
+        }
+        catch(IOException ex) { 
+            System.out.println("IOException"); 
+        } 
+	}
+	
+	public void deserializar() {
+		try {    
+            FileInputStream file = new FileInputStream("datos/datos.ser"); 
+            ObjectInputStream in = new ObjectInputStream(file); 
+            modelo = (ProgramaSIS)in.readObject(); 
+            in.close(); 
+            file.close(); 
+        } catch(IOException ex) { 
+            System.out.println("IOException"); 
+        } catch(ClassNotFoundException ex) { 
+            System.out.println("ClassNotFoundException"); 
+        } 
+	}
+	
+	public void abrirDialogo(String opcion) {
+		if(opcion.equals(VER_PERFIL_PROFESIONAL)) {
+			dialogoPerfilProfesional = new DialogoPerfilProfesional(this);
+			dialogoPerfilProfesional.setLocationRelativeTo(this);
+			dialogoPerfilProfesional.setVisible(true);
+		}else if(opcion.equals(VER_PERFIL_OCUPACIONAL)){
+			dialogoPerfilOcupacional = new DialogoPerfilOcupacional(this);
+			dialogoPerfilOcupacional.setLocationRelativeTo(this);
+			dialogoPerfilOcupacional.setVisible(true);
+		}else {
+			
+		}
+		this.setVisible(false);
+	}
+	
+	public void cerrarDialogo(String opcion) {
+		if(opcion.equals(VER_PERFIL_PROFESIONAL)) {
+			dialogoPerfilProfesional.setVisible(false);
+			dialogoPerfilProfesional = null;
+		}else if(opcion.equals(VER_PERFIL_OCUPACIONAL)){
+			dialogoPerfilOcupacional.setVisible(false);
+			dialogoPerfilOcupacional = null;
+		}else {
+			
+		}
+		this.setVisible(true);
 	}
 	
 	public String getVision() {
@@ -114,13 +175,39 @@ public class Main extends JFrame implements ActionListener {
 		modelo.getObjetivoFormacion().setDescripcion(objetivo);
 	}
 	
+	public String getPerfilProfesional() {
+		return modelo.getPerfilProfesional().getDescripcion();
+	}
+	
+	public void guardarPerfilProfesional(String perfilProfesional) {
+		modelo.getPerfilProfesional().setDescripcion(perfilProfesional);
+	}
+	
+	public String getPerfilOcupacional() {
+		return modelo.getPerfilOcupacional().getDescripcion();
+	}
+	
+	public void guardarPerfilOcupacional(String perfilOcupacional) {
+		modelo.getPerfilOcupacional().setDescripcion(perfilOcupacional);
+	}
+	
+	public void dispose() {
+		int input = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?");
+		if(input == 0) {
+			serializar();
+			System.exit(0);
+		}else if(input == 1){
+			System.exit(0);
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		String comando = evento.getActionCommand();
 		if(comando.equals(VER_PERFIL_OCUPACIONAL)) {
-			
+			abrirDialogo(VER_PERFIL_OCUPACIONAL);
 		}else if(comando.equals(VER_PERFIL_PROFESIONAL)) {
-			
+			abrirDialogo(VER_PERFIL_PROFESIONAL);
 		}else {
 			
 		}
