@@ -24,6 +24,14 @@ public class ProgramaSIS implements Serializable {
 		perfilProfesional = new PerfilProfesional(5);
 		pensum = new Pensum();
 	}
+	
+	public Semestre[] darSemestres() {
+		return pensum.getSemestres();
+	}
+	
+	public void agregarMateria(Asignatura m, Semestre s) {
+		s.agregarAsignatura(m);
+	}
 
 	public Mision getMision() {
 		return mision;

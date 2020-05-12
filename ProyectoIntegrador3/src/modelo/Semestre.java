@@ -43,4 +43,9 @@ public class Semestre implements Serializable {
 		asignaturas.add(asignatura);
 	}
 	
+	@Override
+	public String toString() {
+		return numeroSemestre;
+	}
+	
 }

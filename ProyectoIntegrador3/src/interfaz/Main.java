@@ -20,7 +20,9 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
+import modelo.Asignatura;
 import modelo.ProgramaSIS;
+import modelo.Semestre;
 
 @SuppressWarnings("serial")
 public class Main extends JFrame implements ActionListener {
@@ -35,7 +37,7 @@ public class Main extends JFrame implements ActionListener {
 	private PanelObjetivoFormacion panelObjetivoFormacion;
 	private DialogoPerfilProfesional dialogoPerfilProfesional;
 	private DialogoPerfilOcupacional dialogoPerfilOcupacional;
-//	private DialogoPensum dialogoPensum;
+	private DialogoPensum dialogoPensum;
 	
 	private JButton butPerfilOcupacional, butPerfilProfesional, butVerPensum;
 	
@@ -133,7 +135,9 @@ public class Main extends JFrame implements ActionListener {
 			dialogoPerfilOcupacional.setLocationRelativeTo(this);
 			dialogoPerfilOcupacional.setVisible(true);
 		}else {
-			
+			dialogoPensum = new DialogoPensum(this);
+			dialogoPensum.setLocationRelativeTo(this);
+			dialogoPensum.setVisible(true);
 		}
 		this.setVisible(false);
 	}
@@ -146,7 +150,8 @@ public class Main extends JFrame implements ActionListener {
 			dialogoPerfilOcupacional.setVisible(false);
 			dialogoPerfilOcupacional = null;
 		}else {
-			
+			dialogoPensum.setVisible(false);
+			dialogoPensum = null;
 		}
 		this.setVisible(true);
 	}
@@ -191,6 +196,14 @@ public class Main extends JFrame implements ActionListener {
 		modelo.getPerfilOcupacional().setDescripcion(perfilOcupacional);
 	}
 	
+	public Semestre[] darSemestres() {
+		return modelo.darSemestres();
+	}
+	
+	public void agregarMateria(Asignatura a) {
+		modelo.agregarMateria(a, dialogoPensum.darSemestre());
+	}
+	
 	public void dispose() {
 		int input = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?");
 		if(input == 0) {
@@ -209,7 +222,7 @@ public class Main extends JFrame implements ActionListener {
 		}else if(comando.equals(VER_PERFIL_PROFESIONAL)) {
 			abrirDialogo(VER_PERFIL_PROFESIONAL);
 		}else {
-			
+			abrirDialogo(VER_PENSUM);
 		}
 		
 	}
