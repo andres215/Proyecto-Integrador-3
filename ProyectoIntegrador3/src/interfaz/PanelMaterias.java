@@ -26,7 +26,7 @@ public class PanelMaterias extends JPanel implements ListSelectionListener, Acti
 	private JButton butAgregarMateria;
 	private JList<Asignatura> listaMaterias;
 	private JScrollPane scroll;
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public PanelMaterias(DialogoPensum principal) {
 		this.principal = principal;
@@ -59,6 +59,11 @@ public class PanelMaterias extends JPanel implements ListSelectionListener, Acti
 	@Override
 	public void valueChanged(ListSelectionEvent evento) {
 		
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void refrescarLista() {
+		listaMaterias = new JList(principal.darSemestre().getAsignaturas().toArray());
 	}
 
 	@Override

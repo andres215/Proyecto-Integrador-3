@@ -1,4 +1,4 @@
-package interfaz;
+	package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.NumberFormat;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
@@ -36,7 +38,7 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 	public DialogoAgregarAsignatura(DialogoPensum principal) {
 		this.principal = principal;
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setSize(new Dimension(350,400));
+		setSize(new Dimension(290,200));
 		setTitle("Agregar");
 		setResizable(false);
 		setLocationRelativeTo(null);
@@ -47,10 +49,12 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 		setLayout(new BorderLayout());
 		JPanel general = new JPanel();
 		general.setBorder(border);
+		general.setLayout(new GridLayout(5,2));
+		NumberFormat nf = NumberFormat.getNumberInstance();
 		
 		String[] areas = {Asignatura.CIENCIAS_BASICAS, Asignatura.ESPECIFICIAS_INGENIERIA};
-		txtCodigo = new JFormattedTextField();
-		txtCreditos = new JFormattedTextField();
+		txtCodigo = new JFormattedTextField(nf);
+		txtCreditos = new JFormattedTextField(nf);
 		txtNombre = new JTextField();	
 		txtHorario = new JTextField();
 		comboAreaFormacion = new JComboBox<String>(areas);
@@ -60,6 +64,12 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 		labHorario = new JLabel("Horario");
 		labCodigo = new JLabel("Código");
 		labAreaFormacion = new JLabel("Área formación");
+		
+		general.add(labCodigo); general.add(txtCodigo);
+		general.add(labNombre); general.add(txtNombre);
+		general.add(labHorario); general.add(txtHorario);
+		general.add(labCreditos); general.add(txtCreditos);
+		general.add(labAreaFormacion); general.add(comboAreaFormacion);
 		
 		butGuardar = new JButton(GUARDAR);
 		butGuardar.setActionCommand(GUARDAR);
@@ -77,15 +87,25 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 		add(opciones, BorderLayout.SOUTH);
 	}
 	
-	public void guardar() {
-		
+	public void guardar() throws Exception {
+		if(txtCodigo.getText().equals("") || txtNombre.getText().equals("") || txtCreditos.getText().equals("") || txtHorario.getText().equals("")) {
+			throw new Exception();
+		}else {
+			Asignatura as = new Asignatura(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), Integer.parseInt(txtCreditos.getText()), txtHorario.getText(), comboAreaFormacion.getSelectedItem().toString());
+			principal.guardarMateria(as);
+			principal.cerrarDialogoAgregarMateria();
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		String comando = evento.getActionCommand();
 		if(comando.equals(GUARDAR)) {
-			guardar();
+			try {
+				guardar();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		}else {
 			principal.cerrarDialogoAgregarMateria();
 		}

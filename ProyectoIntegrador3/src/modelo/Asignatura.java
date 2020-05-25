@@ -62,5 +62,9 @@ public class Asignatura implements Serializable {
 	public void setAreaFormacion(String areaFormacion) {
 		this.areaFormacion = areaFormacion;
 	}
+	
+	public String toString() {
+		return nombre;
+	}
 
 }

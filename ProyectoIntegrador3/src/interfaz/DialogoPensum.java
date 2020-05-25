@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import modelo.Asignatura;
 import modelo.Semestre;
 
 @SuppressWarnings("serial")
@@ -60,6 +61,11 @@ public class DialogoPensum extends JDialog implements ActionListener {
 	public void cerrarDialogoAgregarMateria() {
 		dialogoAgregarAsignatura.setVisible(false);
 		dialogoAgregarAsignatura = null;
+	}
+	
+	public void guardarMateria(Asignatura as) {
+		principal.agregarMateria(as, darSemestre());
+		//panelMaterias.refrescarLista();
 	}
 	
 	public Main darPrincipal() {

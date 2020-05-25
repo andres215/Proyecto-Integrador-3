@@ -200,8 +200,8 @@ public class Main extends JFrame implements ActionListener {
 		return modelo.darSemestres();
 	}
 	
-	public void agregarMateria(Asignatura a) {
-		modelo.agregarMateria(a, dialogoPensum.darSemestre());
+	public void agregarMateria(Asignatura a, Semestre s) {
+		modelo.agregarMateria(a, s);
 	}
 	
 	public void dispose() {

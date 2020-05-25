@@ -20,6 +20,7 @@ public class Pensum implements Serializable {
 		semestres[7] = new Semestre("Octavo", new ArrayList<Asignatura>());
 		semestres[8] = new Semestre("Noveno", new ArrayList<Asignatura>());
 		semestres[9] = new Semestre("Décimo", new ArrayList<Asignatura>());
+		semestres[0].agregarAsignatura(new Asignatura(1, "hola", 3, "asd", Asignatura.CIENCIAS_BASICAS));
 	}
 
 	public Semestre[] getSemestres() {
