@@ -14,8 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import modelo.Asignatura;
+import modelo.Semestre;
 
 @SuppressWarnings("serial")
 public class PanelMaterias extends JPanel implements ListSelectionListener, ActionListener{
@@ -24,11 +23,12 @@ public class PanelMaterias extends JPanel implements ListSelectionListener, Acti
 	
 	private DialogoPensum principal;
 	private JButton butAgregarMateria;
-	private JList<Asignatura> listaMaterias;
+	@SuppressWarnings("rawtypes")
+	private JList listaMaterias;
 	private JScrollPane scroll;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public PanelMaterias(DialogoPensum principal) {
+	public PanelMaterias(DialogoPensum principal, Semestre semestre) {
 		this.principal = principal;
 		Font font = new Font("Verdana", Font.BOLD, 15);
 		TitledBorder border = BorderFactory.createTitledBorder("Asignaturas");
@@ -41,12 +41,12 @@ public class PanelMaterias extends JPanel implements ListSelectionListener, Acti
 		butAgregarMateria.setActionCommand(AGREGAR_MATERIA);
 		butAgregarMateria.addActionListener(this);
 		
-		listaMaterias = new JList(principal.darSemestre().getAsignaturas().toArray());
+		listaMaterias = new JList(semestre.getAsignaturas().toArray());
+
 		scroll = new JScrollPane(listaMaterias);
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		listaMaterias.addListSelectionListener(this);
-		listaMaterias.setSelectedIndex(0);
 		
 		add(scroll, BorderLayout.CENTER);
 		add(butAgregarMateria, BorderLayout.SOUTH);
@@ -61,9 +61,9 @@ public class PanelMaterias extends JPanel implements ListSelectionListener, Acti
 		
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void refrescarLista() {
-		listaMaterias = new JList(principal.darSemestre().getAsignaturas().toArray());
+	@SuppressWarnings("unchecked")
+	public void refrescarLista(Semestre semestre) {
+		listaMaterias.setListData(semestre.getAsignaturas().toArray());
 	}
 
 	@Override

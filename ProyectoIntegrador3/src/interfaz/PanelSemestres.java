@@ -61,7 +61,7 @@ public class PanelSemestres extends JPanel implements ListSelectionListener, Act
 
 	@Override
 	public void valueChanged(ListSelectionEvent evento) {
-		
+		principal.refrescar(listaSemestres.getSelectedValue());
 	}
 
 	@Override

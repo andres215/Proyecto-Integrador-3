@@ -35,7 +35,7 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		setLocationRelativeTo(null);
 		
 		panelSemestres = new PanelSemestres(this);
-		panelMaterias = new PanelMaterias(this);
+		panelMaterias = new PanelMaterias(this, darSemestre());
 		panelInformacionMateria = new PanelInformacionMateria(this);
 		
 		JPanel aux = new JPanel();
@@ -66,6 +66,13 @@ public class DialogoPensum extends JDialog implements ActionListener {
 	public void guardarMateria(Asignatura as) {
 		principal.agregarMateria(as, darSemestre());
 		//panelMaterias.refrescarLista();
+	}
+	
+	public void refrescar(Semestre semestre) {
+		if(panelMaterias!=null) {
+			panelMaterias.refrescarLista(semestre);
+		}
+		
 	}
 	
 	public Main darPrincipal() {
