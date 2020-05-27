@@ -36,8 +36,8 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		setLocationRelativeTo(null);
 		
 		panelSemestres = new PanelSemestres(this);
-		panelMaterias = new PanelMaterias(this, darSemestre());
 		panelInformacionMateria = new PanelInformacionMateria(this);
+		panelMaterias = new PanelMaterias(this, darSemestre());
 		
 		JPanel aux = new JPanel();
 		aux.setLayout(new GridLayout(1,3));
@@ -53,9 +53,21 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		add(aux, BorderLayout.CENTER);
 	}
 	
-	public void abrirDialogoAgregarMateria() {
-		dialogoAgregarAsignatura = new DialogoAgregarAsignatura(this);
+	public void editarMateria(String metodo) {
+		Asignatura as = panelMaterias.darAsignaturaSeleccionada();
+		if(as != null ) {
+			abrirDialogoAgregarMateria(metodo, as);
+		}else {
+			JOptionPane.showMessageDialog(this, "Seleccione primero una materia", "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public void abrirDialogoAgregarMateria(String metodo, Asignatura as) {
+		dialogoAgregarAsignatura = new DialogoAgregarAsignatura(this, metodo, true);
 		dialogoAgregarAsignatura.setLocationRelativeTo(this);
+		if(metodo.equals("Editar")) {
+			dialogoAgregarAsignatura.rellenarCampos(as);
+		}
 		dialogoAgregarAsignatura.setVisible(true);
 	}
 	
@@ -75,10 +87,32 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		}
 	}
 	
+	public void refrescarInformacionMateria(Asignatura as) {
+		panelInformacionMateria.refrescar(as);
+	}
+	
+	public void eliminarMateria() {
+		Asignatura as = panelMaterias.darAsignaturaSeleccionada();
+		if(as != null) {
+			int input = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar esta materia?");
+			if(input == 0) {
+				principal.eliminarAsignatura(as, darSemestre());
+				refrescar(darSemestre());
+				refrescarInformacionMateria(panelMaterias.darAsignaturaSeleccionada());
+			}
+		}else {
+			JOptionPane.showMessageDialog(this, "Seleccione primero una materia", "Error", JOptionPane.ERROR_MESSAGE);
+		}		
+	}
+	
 	public void verInformacionSemestre(Semestre m) {
 		int numeroMaterias = principal.darInformacionSemestre(m)[1];
 		int creditos = principal.darInformacionSemestre(m)[0];
-		JOptionPane.showMessageDialog(this, m.getNumeroSemestre()+" semestre:\n\nNúmero de materias: "+numeroMaterias+"\nTotal créditos: "+creditos);
+		JOptionPane.showMessageDialog(this, "Semestre "+m.getNumeroSemestre()+":\n\nNúmero de materias: "+numeroMaterias+"\nTotal créditos: "+creditos);
+	}
+	
+	public boolean validarMateria(int codigo, String nombre) {
+		return principal.validarMateria(codigo, nombre);
 	}
 	
 	public Main darPrincipal() {

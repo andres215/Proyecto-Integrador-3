@@ -35,15 +35,16 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 	private JLabel labNombre, labCodigo, labCreditos, labHorario, labAreaFormacion;
 	private DialogoPensum principal;
 	
-	public DialogoAgregarAsignatura(DialogoPensum principal) {
+	public DialogoAgregarAsignatura(DialogoPensum principal, String tipo, boolean modal) {
+		super(principal, modal);
 		this.principal = principal;
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(new Dimension(290,200));
-		setTitle("Agregar");
+		setTitle(tipo);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		Font font = new Font("Verdana", Font.BOLD, 15);
-		TitledBorder border = BorderFactory.createTitledBorder("Agregar asignatura");
+		TitledBorder border = BorderFactory.createTitledBorder(tipo+" asignatura");
 		border.setTitleColor(Color.BLUE);
 		border.setTitleFont(font);
 		setLayout(new BorderLayout());
@@ -87,18 +88,28 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 		add(opciones, BorderLayout.SOUTH);
 	}
 	
+	public void rellenarCampos(Asignatura m) {
+		txtCodigo.setText(m.getCodigoAsignatura()+"");
+		txtCreditos.setText(m.getCreditos()+"");
+		txtNombre.setText(m.getNombre());
+		txtHorario.setText(m.getHorario());
+		if(m.getAreaFormacion().equals(Asignatura.ESPECIFICIAS_INGENIERIA)) {
+			comboAreaFormacion.setSelectedIndex(0);
+		}else {
+			comboAreaFormacion.setSelectedIndex(1);
+		}
+	}
+	
 	public void guardar() throws Exception {
 		if(txtCodigo.getText().equals("") || txtNombre.getText().equals("") || txtCreditos.getText().equals("") || txtHorario.getText().equals("")) {
 			throw new Exception();
+		}else if(principal.validarMateria(Integer.parseInt(txtCodigo.getText()), txtNombre.getText())) {
+			JOptionPane.showMessageDialog(this, "La materia ya existe", "Error", JOptionPane.ERROR_MESSAGE);
 		}else {
 			Asignatura as = new Asignatura(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), Integer.parseInt(txtCreditos.getText()), txtHorario.getText(), comboAreaFormacion.getSelectedItem().toString());
 			principal.guardarMateria(as);
 			principal.cerrarDialogoAgregarMateria();
 		}
-	}
-	
-	public boolean materiaCorrecta() {
-		return false;
 	}
 
 	@Override
@@ -108,7 +119,7 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 			try {
 				guardar();
 			}catch(Exception e) {
-				JOptionPane.showMessageDialog(this, "Error al agregar la materia, puede que llenó un campo de forma incorrecta o esa materia ya exista", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Error al agregar la materia, puede que llenó algún campo de forma incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}else {
 			principal.cerrarDialogoAgregarMateria();

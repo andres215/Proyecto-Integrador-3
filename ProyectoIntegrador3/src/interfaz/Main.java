@@ -119,9 +119,8 @@ public class Main extends JFrame implements ActionListener {
             in.close(); 
             file.close(); 
         } catch(IOException ex) { 
-            System.out.println("IOException"); 
-        } catch(ClassNotFoundException ex) { 
-            System.out.println("ClassNotFoundException"); 
+        } catch(ClassNotFoundException es) { 
+        	es.printStackTrace();
         } 
 	}
 	
@@ -158,6 +157,10 @@ public class Main extends JFrame implements ActionListener {
 	
 	public int[] darInformacionSemestre(Semestre m) {
 		return modelo.verInformacionSemestre(m);
+	}
+	
+	public boolean validarMateria(int codigo, String nombre) {
+		return modelo.materiaCorrecta(codigo, nombre);
 	}
 	
 	public String getVision() {
@@ -206,6 +209,10 @@ public class Main extends JFrame implements ActionListener {
 	
 	public void agregarMateria(Asignatura a, Semestre s) {
 		modelo.agregarMateria(a, s);
+	}
+	
+	public void eliminarAsignatura(Asignatura a, Semestre s) {
+		modelo.eliminarAsignatura(a, s);
 	}
 	
 	public void dispose() {

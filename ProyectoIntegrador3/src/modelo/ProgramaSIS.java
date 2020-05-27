@@ -33,6 +33,10 @@ public class ProgramaSIS implements Serializable {
 		s.agregarAsignatura(m);
 	}
 	
+	public void eliminarAsignatura(Asignatura m, Semestre s) {
+		s.eliminarAsignatura(m);
+	}
+	
 	public int[] verInformacionSemestre(Semestre m) {
 		int[] resultado = {m.calcularCreditosSemestre(), m.getAsignaturas().size()};
 		return resultado;
@@ -46,7 +50,7 @@ public class ProgramaSIS implements Serializable {
 		for (int i = 0; i < pensum.getSemestres().length; i++) {
 			for (int j = 0; j < pensum.getSemestres()[i].getAsignaturas().size(); j++) {
 				Asignatura as = pensum.getSemestres()[i].getAsignaturas().get(j);
-				if(as.getCodigoAsignatura() == codigo || as.getNombre().equals("nombre") ) {
+				if(as.getCodigoAsignatura() == codigo || as.getNombre().equals(nombre) ) {
 					return true;
 				}
 			}

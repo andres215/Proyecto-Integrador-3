@@ -14,6 +14,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import modelo.Asignatura;
 import modelo.Semestre;
 
 @SuppressWarnings("serial")
@@ -47,18 +49,23 @@ public class PanelMaterias extends JPanel implements ListSelectionListener, Acti
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		listaMaterias.addListSelectionListener(this);
+		listaMaterias.setSelectedIndex(0);
 		
 		add(scroll, BorderLayout.CENTER);
 		add(butAgregarMateria, BorderLayout.SOUTH);
 	}
 	
 	public void agregarMateria() {
-		principal.abrirDialogoAgregarMateria();
+		principal.abrirDialogoAgregarMateria("Agregar", null);
+	}
+	
+	public Asignatura darAsignaturaSeleccionada() {
+		return (Asignatura) listaMaterias.getSelectedValue();
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent evento) {
-		
+		principal.refrescarInformacionMateria((Asignatura) listaMaterias.getSelectedValue());
 	}
 	
 	@SuppressWarnings("unchecked")

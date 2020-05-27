@@ -43,6 +43,10 @@ public class Semestre implements Serializable {
 		asignaturas.add(asignatura);
 	}
 	
+	public void eliminarAsignatura(Asignatura asignatura) {
+		asignaturas.remove(asignatura);
+	}
+	
 	@Override
 	public String toString() {
 		return numeroSemestre;
