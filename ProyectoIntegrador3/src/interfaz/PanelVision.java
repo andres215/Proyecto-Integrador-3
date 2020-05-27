@@ -30,7 +30,7 @@ public class PanelVision extends JPanel implements ActionListener {
 	public PanelVision(Main principal) {
 		this.principal = principal;
 		Font font = new Font("Verdana", Font.BOLD, 15);
-		TitledBorder border = BorderFactory.createTitledBorder("Visión");
+		TitledBorder border = BorderFactory.createTitledBorder("VisiÃ³n");
 		border.setTitleColor(Color.BLUE);
 		border.setTitleFont(font);
 		setBorder(border);

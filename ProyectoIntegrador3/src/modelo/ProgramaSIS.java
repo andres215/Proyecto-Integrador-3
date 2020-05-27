@@ -32,9 +32,26 @@ public class ProgramaSIS implements Serializable {
 	public void agregarMateria(Asignatura m, Semestre s) {
 		s.agregarAsignatura(m);
 	}
+	
+	public int[] verInformacionSemestre(Semestre m) {
+		int[] resultado = {m.calcularCreditosSemestre(), m.getAsignaturas().size()};
+		return resultado;
+	}
 
 	public Mision getMision() {
 		return mision;
+	}
+	
+	public boolean materiaCorrecta(int codigo, String nombre) {
+		for (int i = 0; i < pensum.getSemestres().length; i++) {
+			for (int j = 0; j < pensum.getSemestres()[i].getAsignaturas().size(); j++) {
+				Asignatura as = pensum.getSemestres()[i].getAsignaturas().get(j);
+				if(as.getCodigoAsignatura() == codigo || as.getNombre().equals("nombre") ) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 	public void setMision(Mision mision) {

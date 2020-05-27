@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import modelo.Asignatura;
@@ -30,7 +31,7 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		this.principal = principal;
 		setSize(new Dimension(850,480));
 		setLayout(new BorderLayout());
-		setTitle("PÉNSUM Programa Ingeniería de Sistemas - Institución Universitaria Antonio José Camacho");
+		setTitle("PÃ‰NSUM Programa IngenierÃ­a de Sistemas - InstituciÃ³n Universitaria Antonio JosÃ© Camacho");
 		setResizable(false);
 		setLocationRelativeTo(null);
 		
@@ -65,14 +66,19 @@ public class DialogoPensum extends JDialog implements ActionListener {
 	
 	public void guardarMateria(Asignatura as) {
 		principal.agregarMateria(as, darSemestre());
-		//panelMaterias.refrescarLista();
+		refrescar(panelSemestres.darSemestre());
 	}
 	
 	public void refrescar(Semestre semestre) {
 		if(panelMaterias!=null) {
 			panelMaterias.refrescarLista(semestre);
 		}
-		
+	}
+	
+	public void verInformacionSemestre(Semestre m) {
+		int numeroMaterias = principal.darInformacionSemestre(m)[1];
+		int creditos = principal.darInformacionSemestre(m)[0];
+		JOptionPane.showMessageDialog(this, m.getNumeroSemestre()+" semestre:\n\nNÃºmero de materias: "+numeroMaterias+"\nTotal crÃ©ditos: "+creditos);
 	}
 	
 	public Main darPrincipal() {

@@ -30,7 +30,7 @@ public class PanelMision extends JPanel implements ActionListener {
 	public PanelMision(Main principal) {
 		this.principal = principal;
 		Font font = new Font("Verdana", Font.BOLD, 15);
-		TitledBorder border = BorderFactory.createTitledBorder("Misión");
+		TitledBorder border = BorderFactory.createTitledBorder("MisiÃ³n");
 		border.setTitleColor(Color.BLUE);
 		border.setTitleFont(font);
 		setBorder(border);

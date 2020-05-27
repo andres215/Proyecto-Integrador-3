@@ -20,7 +20,7 @@ import modelo.Semestre;
 @SuppressWarnings("serial")
 public class PanelSemestres extends JPanel implements ListSelectionListener, ActionListener {
 	
-	public static final String VER_INFORMACION_SEMESTRE = "Ver información semestre";
+	public static final String VER_INFORMACION_SEMESTRE = "Ver informaciÃ³n semestre";
 	
 	private DialogoPensum principal;
 	private JList<Semestre> listaSemestres;
@@ -52,7 +52,7 @@ public class PanelSemestres extends JPanel implements ListSelectionListener, Act
 	}
 	
 	public void mostrarInformacion() {
-		
+		principal.verInformacionSemestre(darSemestre());
 	}
 	
 	public Semestre darSemestre() {

@@ -29,7 +29,7 @@ public class Main extends JFrame implements ActionListener {
 	
 	public static final String VER_PERFIL_OCUPACIONAL = "Perfil ocupacional";
 	public static final String VER_PERFIL_PROFESIONAL = "Perfil profesional";
-	public static final String VER_PENSUM = "Pénsum";
+	public static final String VER_PENSUM = "PÃ©nsum";
 	
 	private PanelBanner banner;
 	private PanelMision panelMision;
@@ -52,7 +52,7 @@ public class Main extends JFrame implements ActionListener {
 		setSize(new Dimension(650,480));
 		setLocationRelativeTo(null);
 		setResizable(false);
-		setTitle("Programa Ingeniería de Sistemas - Institución Universitaria Antonio José Camacho");
+		setTitle("Programa IngenierÃ­a de Sistemas - InstituciÃ³n Universitaria Antonio JosÃ© Camacho");
 		setLayout(new BorderLayout());
 		
 		modelo = new ProgramaSIS();
@@ -156,6 +156,10 @@ public class Main extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 	
+	public int[] darInformacionSemestre(Semestre m) {
+		return modelo.verInformacionSemestre(m);
+	}
+	
 	public String getVision() {
 		return modelo.getVision().getDescripcion();
 	}
@@ -205,7 +209,7 @@ public class Main extends JFrame implements ActionListener {
 	}
 	
 	public void dispose() {
-		int input = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?");
+		int input = JOptionPane.showConfirmDialog(this, "Â¿Desea guardar los cambios?");
 		if(input == 0) {
 			serializar();
 			System.exit(0);

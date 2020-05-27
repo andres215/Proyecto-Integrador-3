@@ -1,4 +1,4 @@
-	package interfaz;
+package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -52,18 +52,18 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 		general.setLayout(new GridLayout(5,2));
 		NumberFormat nf = NumberFormat.getNumberInstance();
 		
-		String[] areas = {Asignatura.CIENCIAS_BASICAS, Asignatura.ESPECIFICIAS_INGENIERIA};
+		String[] areas = {Asignatura.ESPECIFICIAS_INGENIERIA, Asignatura.CIENCIAS_BASICAS, };
 		txtCodigo = new JFormattedTextField(nf);
 		txtCreditos = new JFormattedTextField(nf);
 		txtNombre = new JTextField();	
 		txtHorario = new JTextField();
 		comboAreaFormacion = new JComboBox<String>(areas);
-		comboAreaFormacion.setSelectedIndex(1);
+		comboAreaFormacion.setSelectedIndex(0);
 		labNombre = new JLabel("Nombre");
-		labCreditos = new JLabel("CrÈditos");
+		labCreditos = new JLabel("Cr√©ditos");
 		labHorario = new JLabel("Horario");
-		labCodigo = new JLabel("CÛdigo");
-		labAreaFormacion = new JLabel("¡rea formaciÛn");
+		labCodigo = new JLabel("C√≥digo");
+		labAreaFormacion = new JLabel("√Årea formaci√≥n");
 		
 		general.add(labCodigo); general.add(txtCodigo);
 		general.add(labNombre); general.add(txtNombre);
@@ -96,6 +96,10 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 			principal.cerrarDialogoAgregarMateria();
 		}
 	}
+	
+	public boolean materiaCorrecta() {
+		return false;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent evento) {
@@ -104,7 +108,7 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 			try {
 				guardar();
 			}catch(Exception e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(this, "Error al agregar la materia, puede que llen√≥ un campo de forma incorrecta o esa materia ya exista", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}else {
 			principal.cerrarDialogoAgregarMateria();

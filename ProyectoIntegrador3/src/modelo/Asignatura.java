@@ -5,8 +5,8 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Asignatura implements Serializable {
 	
-	public static final String CIENCIAS_BASICAS = "Ciencias Básicas";
-	public static final String ESPECIFICIAS_INGENIERIA = "Específicas de Ingeniería";
+	public static final String CIENCIAS_BASICAS = "Ciencias BÃ¡sicas";
+	public static final String ESPECIFICIAS_INGENIERIA = "EspecÃ­ficas de IngenierÃ­a";
 	
 	private int codigoAsignatura;
 	private String nombre;
