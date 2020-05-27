@@ -106,7 +106,7 @@ public class PanelInformacionMateria extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent evento) {
 		String comando = evento.getActionCommand();
 		if(comando.equals(EDITAR)) {
-			principal.editarMateria("Editar");
+			principal.abrirDialogoEditarMateria("Editar");
 		}else {
 			principal.eliminarMateria();
 		}

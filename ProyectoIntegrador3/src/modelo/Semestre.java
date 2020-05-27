@@ -47,6 +47,18 @@ public class Semestre implements Serializable {
 		asignaturas.remove(asignatura);
 	}
 	
+	public void editarAsignatura(Asignatura asignaturaOriginal, Asignatura asignaturaNueva) {
+		boolean flag = false;
+		int index = 0;
+		for (int i = 0; i < asignaturas.size() && !flag; i++) {
+			if(asignaturas.get(i).getNombre().equals(asignaturaOriginal.getNombre())) {
+				index = i;
+				flag = true;
+			}
+		}
+		asignaturas.set(index, asignaturaNueva);
+	}
+	
 	@Override
 	public String toString() {
 		return numeroSemestre;

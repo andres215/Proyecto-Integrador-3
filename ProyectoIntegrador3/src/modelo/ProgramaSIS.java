@@ -5,8 +5,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class ProgramaSIS implements Serializable {
 	
-	private Mision mision;
-	private Vision vision;
+	private MisionVision misionVision;
 	private ObjetivoFormacion objetivoFormacion;
 	private PerfilOcupacional perfilOcupacional;
 	private PerfilProfesional perfilProfesional;
@@ -17,8 +16,7 @@ public class ProgramaSIS implements Serializable {
 	}
 	
 	public void inicializarModelo() {
-		mision = new Mision(1);
-		vision = new Vision(2);
+		misionVision = new MisionVision(1);
 		objetivoFormacion = new ObjetivoFormacion(3);
 		perfilOcupacional = new PerfilOcupacional(4);
 		perfilProfesional = new PerfilProfesional(5);
@@ -37,13 +35,17 @@ public class ProgramaSIS implements Serializable {
 		s.eliminarAsignatura(m);
 	}
 	
+	public void editarAsignatura(Asignatura asignaturaOriginal, Asignatura asignaturaNueva, Semestre s) {
+		s.editarAsignatura(asignaturaOriginal, asignaturaNueva);
+	}
+	
 	public int[] verInformacionSemestre(Semestre m) {
 		int[] resultado = {m.calcularCreditosSemestre(), m.getAsignaturas().size()};
 		return resultado;
 	}
 
-	public Mision getMision() {
-		return mision;
+	public MisionVision getMisionVision() {
+		return misionVision;
 	}
 	
 	public boolean materiaCorrecta(int codigo, String nombre) {
@@ -58,16 +60,8 @@ public class ProgramaSIS implements Serializable {
 		return false;
 	}
 
-	public void setMision(Mision mision) {
-		this.mision = mision;
-	}
-
-	public Vision getVision() {
-		return vision;
-	}
-
-	public void setVision(Vision vision) {
-		this.vision = vision;
+	public void setMisionVision(MisionVision misionVision) {
+		this.misionVision= misionVision;
 	}
 
 	public ObjetivoFormacion getObjetivoFormacion() {

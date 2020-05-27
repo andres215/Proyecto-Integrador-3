@@ -3,12 +3,12 @@ package modelo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Mision implements Serializable {
+public class MisionVision implements Serializable {
 
 	private int codigoMision;
 	private String descripcion;
 	
-	public Mision(int codigoMision) {
+	public MisionVision(int codigoMision) {
 		super();
 		this.codigoMision = codigoMision;
 	}

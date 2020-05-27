@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class PanelMision extends JPanel implements ActionListener {
+public class PanelMisionVision extends JPanel implements ActionListener {
 	
 	public final static String GUARDAR_MISION = "Guardar";
 	public final static String EDITAR_MISION = "Editar";
@@ -27,10 +27,10 @@ public class PanelMision extends JPanel implements ActionListener {
 	private JTextArea textMision;
 	private JScrollPane scroll;
 	
-	public PanelMision(Main principal) {
+	public PanelMisionVision(Main principal) {
 		this.principal = principal;
 		Font font = new Font("Verdana", Font.BOLD, 15);
-		TitledBorder border = BorderFactory.createTitledBorder("Misión");
+		TitledBorder border = BorderFactory.createTitledBorder("Misión y Visión");
 		border.setTitleColor(Color.BLUE);
 		border.setTitleFont(font);
 		setBorder(border);
@@ -50,7 +50,7 @@ public class PanelMision extends JPanel implements ActionListener {
 		
 		JPanel formulario = new JPanel();
 		formulario.setLayout(new GridLayout(1,1));
-		textMision = new JTextArea(principal.getMision());
+		textMision = new JTextArea(principal.getMisionVision());
 		textMision.setLineWrap(true);
 		textMision.setEditable(false);
 		scroll = new JScrollPane(textMision);

@@ -32,8 +32,7 @@ public class Main extends JFrame implements ActionListener {
 	public static final String VER_PENSUM = "Pénsum";
 	
 	private PanelBanner banner;
-	private PanelMision panelMision;
-	private PanelVision panelVision;
+	private PanelMisionVision panelMisionVision;
 	private PanelObjetivoFormacion panelObjetivoFormacion;
 	private DialogoPerfilProfesional dialogoPerfilProfesional;
 	private DialogoPerfilOcupacional dialogoPerfilOcupacional;
@@ -69,14 +68,12 @@ public class Main extends JFrame implements ActionListener {
 		butVerPensum.addActionListener(this);
 		
 		banner = new PanelBanner();
-		panelMision = new PanelMision(this);
-		panelVision = new PanelVision(this);
+		panelMisionVision = new PanelMisionVision(this);
 		panelObjetivoFormacion = new PanelObjetivoFormacion(this);
 		
 		JPanel aux1 = new JPanel();
-		aux1.setLayout(new GridLayout(1,2));
-		aux1.add(panelMision);
-		aux1.add(panelVision);
+		aux1.setLayout(new GridLayout(1,1));
+		aux1.add(panelMisionVision);
 		
 		JPanel aux2 = new JPanel();
 		aux2.setLayout(new GridLayout(2,1));
@@ -163,20 +160,12 @@ public class Main extends JFrame implements ActionListener {
 		return modelo.materiaCorrecta(codigo, nombre);
 	}
 	
-	public String getVision() {
-		return modelo.getVision().getDescripcion();
-	}
-	
-	public void guardarVision(String vision) {
-		modelo.getVision().setDescripcion(vision);
-	}
-	
-	public String getMision() {
-		return modelo.getMision().getDescripcion();
+	public String getMisionVision() {
+		return modelo.getMisionVision().getDescripcion();
 	}
 	
 	public void guardarMision(String mision) {
-		modelo.getMision().setDescripcion(mision);
+		modelo.getMisionVision().setDescripcion(mision);
 	}
 	
 	public String getObjetivoFormacion() {
@@ -213,6 +202,10 @@ public class Main extends JFrame implements ActionListener {
 	
 	public void eliminarAsignatura(Asignatura a, Semestre s) {
 		modelo.eliminarAsignatura(a, s);
+	}
+	
+	public void editarAsignatura(Asignatura mActual, Asignatura mNueva, Semestre s) {
+		modelo.editarAsignatura(mActual, mNueva, s);
 	}
 	
 	public void dispose() {

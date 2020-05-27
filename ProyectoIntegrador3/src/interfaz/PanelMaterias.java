@@ -55,6 +55,11 @@ public class PanelMaterias extends JPanel implements ListSelectionListener, Acti
 		add(butAgregarMateria, BorderLayout.SOUTH);
 	}
 	
+	@SuppressWarnings("rawtypes")
+	public JList getListaMaterias() {
+		return listaMaterias;
+	}
+	
 	public void agregarMateria() {
 		principal.abrirDialogoAgregarMateria("Agregar", null);
 	}

@@ -34,10 +34,12 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 	private JComboBox<String> comboAreaFormacion;
 	private JLabel labNombre, labCodigo, labCreditos, labHorario, labAreaFormacion;
 	private DialogoPensum principal;
+	private String tipo;
 	
 	public DialogoAgregarAsignatura(DialogoPensum principal, String tipo, boolean modal) {
 		super(principal, modal);
 		this.principal = principal;
+		this.tipo = tipo;
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setSize(new Dimension(290,200));
 		setTitle(tipo);
@@ -111,13 +113,27 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 			principal.cerrarDialogoAgregarMateria();
 		}
 	}
+	
+	public void editar() throws Exception {
+		if(txtCodigo.getText().equals("") || txtNombre.getText().equals("") || txtCreditos.getText().equals("") || txtHorario.getText().equals("")) {
+			throw new Exception();
+		}else {
+			Asignatura as = new Asignatura(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), Integer.parseInt(txtCreditos.getText()), txtHorario.getText(), comboAreaFormacion.getSelectedItem().toString());
+			principal.editarAsignatura(as);
+			principal.cerrarDialogoAgregarMateria();
+		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		String comando = evento.getActionCommand();
 		if(comando.equals(GUARDAR)) {
-			try {
-				guardar();
+			try {					
+				if(tipo.equals("Agregar")) {
+					guardar();
+				}else {
+					editar();
+				}
 			}catch(Exception e) {
 				JOptionPane.showMessageDialog(this, "Error al agregar la materia, puede que llenó algún campo de forma incorrecta", "Error", JOptionPane.ERROR_MESSAGE);
 			}

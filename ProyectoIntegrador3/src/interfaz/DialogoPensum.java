@@ -53,13 +53,26 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		add(aux, BorderLayout.CENTER);
 	}
 	
-	public void editarMateria(String metodo) {
+	public void abrirDialogoEditarMateria(String metodo) {
 		Asignatura as = panelMaterias.darAsignaturaSeleccionada();
 		if(as != null ) {
 			abrirDialogoAgregarMateria(metodo, as);
 		}else {
 			JOptionPane.showMessageDialog(this, "Seleccione primero una materia", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public void seleccionarPrimera() {
+		if(panelMaterias != null) {
+			if(panelMaterias.darAsignaturaSeleccionada() != null) {
+				panelMaterias.getListaMaterias().setSelectedIndex(0);
+			}	
+		}
+	}
+	
+	public void editarAsignatura(Asignatura nueva) {
+		principal.editarAsignatura(panelMaterias.darAsignaturaSeleccionada(), nueva, darSemestre());
+		refrescar(panelSemestres.darSemestre());
 	}
 	
 	public void abrirDialogoAgregarMateria(String metodo, Asignatura as) {
@@ -70,7 +83,7 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		}
 		dialogoAgregarAsignatura.setVisible(true);
 	}
-	
+
 	public void cerrarDialogoAgregarMateria() {
 		dialogoAgregarAsignatura.setVisible(false);
 		dialogoAgregarAsignatura = null;
