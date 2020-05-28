@@ -124,7 +124,7 @@ public class DialogoPensum extends JDialog implements ActionListener {
 		JOptionPane.showMessageDialog(this, "Semestre "+m.getNumeroSemestre()+":\n\nNúmero de materias: "+numeroMaterias+"\nTotal créditos: "+creditos);
 	}
 	
-	public boolean validarMateria(int codigo, String nombre) {
+	public boolean validarMateria(String codigo, String nombre) {
 		return principal.validarMateria(codigo, nombre);
 	}
 	

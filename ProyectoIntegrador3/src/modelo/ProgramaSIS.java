@@ -48,11 +48,11 @@ public class ProgramaSIS implements Serializable {
 		return misionVision;
 	}
 	
-	public boolean materiaCorrecta(int codigo, String nombre) {
+	public boolean materiaCorrecta(String codigo, String nombre) {
 		for (int i = 0; i < pensum.getSemestres().length; i++) {
 			for (int j = 0; j < pensum.getSemestres()[i].getAsignaturas().size(); j++) {
 				Asignatura as = pensum.getSemestres()[i].getAsignaturas().get(j);
-				if(as.getCodigoAsignatura() == codigo || as.getNombre().equals(nombre) ) {
+				if(as.getCodigoAsignatura().equals(codigo) || as.getNombre().equals(nombre) ) {
 					return true;
 				}
 			}

@@ -156,7 +156,7 @@ public class Main extends JFrame implements ActionListener {
 		return modelo.verInformacionSemestre(m);
 	}
 	
-	public boolean validarMateria(int codigo, String nombre) {
+	public boolean validarMateria(String codigo, String nombre) {
 		return modelo.materiaCorrecta(codigo, nombre);
 	}
 	

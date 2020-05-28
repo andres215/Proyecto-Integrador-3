@@ -8,13 +8,13 @@ public class Asignatura implements Serializable {
 	public static final String CIENCIAS_BASICAS = "Ciencias Básicas";
 	public static final String ESPECIFICIAS_INGENIERIA = "Específicas de Ingeniería";
 	
-	private int codigoAsignatura;
+	private String codigoAsignatura;
 	private String nombre;
 	private int creditos;
 	private String horario;
 	private String areaFormacion;
 	
-	public Asignatura(int codigoAsignatura, String nombre, int creditos, String horario, String areaFormacion) {
+	public Asignatura(String codigoAsignatura, String nombre, int creditos, String horario, String areaFormacion) {
 		super();
 		this.codigoAsignatura = codigoAsignatura;
 		this.nombre = nombre;
@@ -23,11 +23,11 @@ public class Asignatura implements Serializable {
 		this.setAreaFormacion(areaFormacion);
 	}
 
-	public int getCodigoAsignatura() {
+	public String getCodigoAsignatura() {
 		return codigoAsignatura;
 	}
 
-	public void setCodigoAsignatura(int codigoAsignatura) {
+	public void setCodigoAsignatura(String codigoAsignatura) {
 		this.codigoAsignatura = codigoAsignatura;
 	}
 

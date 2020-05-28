@@ -29,8 +29,8 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 	public final static String CANCELAR = "Cancelar";
 		
 	private JButton butGuardar, butCancelar;
-	private JFormattedTextField txtCodigo, txtCreditos;
-	private JTextField txtNombre, txtHorario;
+	private JFormattedTextField txtCreditos;
+	private JTextField txtNombre, txtHorario, txtCodigo;
 	private JComboBox<String> comboAreaFormacion;
 	private JLabel labNombre, labCodigo, labCreditos, labHorario, labAreaFormacion;
 	private DialogoPensum principal;
@@ -56,7 +56,7 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 		NumberFormat nf = NumberFormat.getNumberInstance();
 		
 		String[] areas = {Asignatura.ESPECIFICIAS_INGENIERIA, Asignatura.CIENCIAS_BASICAS, };
-		txtCodigo = new JFormattedTextField(nf);
+		txtCodigo = new JTextField();
 		txtCreditos = new JFormattedTextField(nf);
 		txtNombre = new JTextField();	
 		txtHorario = new JTextField();
@@ -105,12 +105,13 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 	public void guardar() throws Exception {
 		if(txtCodigo.getText().equals("") || txtNombre.getText().equals("") || txtCreditos.getText().equals("") || txtHorario.getText().equals("")) {
 			throw new Exception();
-		}else if(principal.validarMateria(Integer.parseInt(txtCodigo.getText()), txtNombre.getText())) {
+		}else if(principal.validarMateria(txtCodigo.getText(), txtNombre.getText())) {
 			JOptionPane.showMessageDialog(this, "La materia ya existe", "Error", JOptionPane.ERROR_MESSAGE);
 		}else {
-			Asignatura as = new Asignatura(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), Integer.parseInt(txtCreditos.getText()), txtHorario.getText(), comboAreaFormacion.getSelectedItem().toString());
+			Asignatura as = new Asignatura(txtCodigo.getText(), txtNombre.getText(), Integer.parseInt(txtCreditos.getText()), txtHorario.getText(), comboAreaFormacion.getSelectedItem().toString());
 			principal.guardarMateria(as);
-			principal.cerrarDialogoAgregarMateria();
+			JOptionPane.showMessageDialog(this, "Materia agregada correctamente");
+			principal.cerrarDialogoAgregarMateria();	
 		}
 	}
 	
@@ -118,8 +119,9 @@ public class DialogoAgregarAsignatura extends JDialog implements ActionListener{
 		if(txtCodigo.getText().equals("") || txtNombre.getText().equals("") || txtCreditos.getText().equals("") || txtHorario.getText().equals("")) {
 			throw new Exception();
 		}else {
-			Asignatura as = new Asignatura(Integer.parseInt(txtCodigo.getText()), txtNombre.getText(), Integer.parseInt(txtCreditos.getText()), txtHorario.getText(), comboAreaFormacion.getSelectedItem().toString());
+			Asignatura as = new Asignatura(txtCodigo.getText(), txtNombre.getText(), Integer.parseInt(txtCreditos.getText()), txtHorario.getText(), comboAreaFormacion.getSelectedItem().toString());
 			principal.editarAsignatura(as);
+			JOptionPane.showMessageDialog(this, "Materia editada correctamente");
 			principal.cerrarDialogoAgregarMateria();
 		}
 	}
